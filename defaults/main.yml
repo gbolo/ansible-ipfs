@@ -1,9 +1,23 @@
 ---
 # defaults file for ipfs
 
+## IPFS General OS settings
+ipfs_user: "root"
+ipfs_group: "root"
+ipfs_create_user: true
+ipfs_create_group: true
+
+ipfs_config_path: "test"
+ipfs_version_file: 3
+
+ipfs_create_systemd_unit: true
+ipfs_systemd_unit_name: "ipfs"
+ipfs_service_onboot: true
+
+## SET ENV VARIABLE: IPFS_PATH (for configs)
 
 ## IPFS configuration
-ipfs_config_api_httpheaders: "null"
+ipfs_config_api_httpheaders: null
 ipfs_config_addresses_api: "/ip4/0.0.0.0/tcp/5001"
 ipfs_config_addresses_gateway: "/ip4/0.0.0.0/tcp/8080"
 ipfs_config_addresses_swarm:
@@ -14,10 +28,28 @@ ipfs_config_bootstrap:
   - "/ip4/104.236.176.52/tcp/4001/ipfs/QmSoLnSGccFuZQJzRadHn95W2CrSFmZuTdDWP8HXaHca9z"
 ipfs_config_datastore_BloomFilterSize: 0
 ipfs_config_datastore_GCPeriod: "1h"
-ipfs_config_datastore_HashOnRead: "false"
-ipfs_config_datastore_NoSync: "false"
-ipfs_config_datastore_Params: "null"
+ipfs_config_datastore_HashOnRead: false
+ipfs_config_datastore_NoSync: false
+ipfs_config_datastore_Params: null
 ipfs_config_datastore_Path: "/data/ipfs/datastore"
 ipfs_config_datastore_StorageGCWatermark: 90
 ipfs_config_datastore_StorageMax: "1GB"
 ipfs_config_datastore_Type: "leveldb"
+
+## Create dictionary of full config for easy conversion to json
+ipfs_full_config:
+  Identity:
+    PeerID: "QmWabzryMA4sBXqjjarVHqQx52Lc8Ba4ysbn4ANT6uG9HF"
+    PrivKey: "CAASpwkwggSjAgEAAoIBAQCgLCM3SWBJoKKP12XBhC/MjIg5ASSh0QTL3968Zw+GpJJmPuXmneZxLIZqzTSbFYReO9BaoJ8urbJQ9r5jeCXBYNCxX3GqIRhOReaHWz89SjH2633heY/kw/l5zvqHO2CFkUEZqQ3QLymunV/IEUMjxFD2R3cNRcx117XjJxV2u3gSm95AWyyD6f7B4B3TmPu4f+yxENsOZjHpVKpG/YEifMdmv+J0TpzrSJoSs3hLJV9LgrqDRxsRQbBM6mapV7UylsB9AX62rG/mqT0NE3yWyQY2cD9AvLQ9CflO0mxE7W618mvKV4ydHmt3SqLE94t0PmicDEeBOnWCeuY07OUVAgMBAAECggEAT438o84vJALEG1up79cfAqLeWinmLvUpQ7Xa5Irv3DlLebtN5yCQP7AUx2FK+qhSSZe94fWbeszNH4eegrs/TXAv15mHVDAB6YawfJRmsaNzc6f9qwr83Gw2MjkKmDZ2t4Cw6/Tapod2VYNW+oEQbuhoKhrO1+nOJs3QSpW0BHdJgQtppEVTLnpSkGpEX9ld9Y/F1fsuf++ix5UzKqlNqOlB+yEql8c8PPWNinZwFkAMvo4ZQAQ22mimFKtR3doTet6d2ovGth5ExMGWM8Z9Q2zhdtBPwAjw5upopyJpLlomW0hwCbMWYx3RbqJs/SqNWORYTS5dLdC1y2O3aK7TgQKBgQDLo/Xt8cwYOtK/3fRF2KH5CF8If0TeRvuCxCAasB4QG+4x6Efg/wqAuHlHTEBTjXlLNQ7xTF89Pj9MAc2aqbaM/tnQESo3xnPmJ/oib+f3qXbjedRBkaPtJpp4MQJ9y8FjS8SE2PwTcBQNT7P6iqtdCLOygmjBp6w3jJhIkGiZ9QKBgQDJWwTTzN1F8awJDSwdXFqh9kpfubZfK/zpneU1kIe/t4jH3xmH2TXkDz9z3oX/m1ea48YvS7xAJHFxlQFEQShcwPAfv8BFa9wvZ3qNm2Ugg0IJqrgcOi8xNqN6Fs/v2fuBtdyegEWBwzCBtvgECMEbnsgx8ovrHN6U8SWPic6KoQKBgHWfSMedaEN+hohoTVWioTvUh//CcyboXRHU8q43l8W6PET7Y7kj1w8ufm6eLnGUP8Ee7niVolUfhTQDvpxc9qJN+cVihL4elIcWBDar6JJ2gcM2dVFCLCsopwRRWp0KebM+6k3JfyBDFnHx3YUTX5OnGRQ8mwFwNdsIDFWtg52ZAoGAd1s8wU/u2kcnczYbsEvObbNQ4u1y7XdltBWkiNvjnAFvUwssVxqql0Vyl3yQcbPjei0KjX6XWG5B0NJCrfLxugmkTS2dC4mkO3VbcBVtHJixzIkmGZVj5Ag/X1+mYscUDw9+d3YRvZm2Zy3OVpXZ4kV85h6gUf4K8r7/RNarWAECgYEAxp6Gvt/8orgy2A1u2WWFC3D/o09xuDJ68XErcwsFVZV8fSOE6/vfb1ns3lmDocA9dvvfzK5ByhBbide7fRHrXt3tlUnB4dxen39lLyrgvHru49Uy85kCeez5KlJ3ure99uAcevM58y9soGu5iwb7vP/kKmcqpiv35tMvh+E9Kw4="
+  Datastore:
+    "Type": "{{ ipfs_config_datastore_Type }}"
+    "Path": "{{ ipfs_config_datastore_Path }}"
+    "StorageMax": "{{ ipfs_config_datastore_StorageMax }}"
+    "StorageGCWatermark": "{{ ipfs_config_datastore_StorageGCWatermark }}"
+    "GCPeriod": "{{ ipfs_config_datastore_GCPeriod }}"
+    "Params": "{{ ipfs_config_datastore_Params }}"
+    "NoSync": "{{ ipfs_config_datastore_NoSync }}"
+  "Addresses":
+    "Swarm": "{{ ipfs_config_addresses_swarm }}"
+    "API": "/ip4/127.0.0.1/tcp/5001"
+    "Gateway": "/ip4/127.0.0.1/tcp/8080"
