@@ -1,4 +1,18 @@
 ---
+
+- name: create ipfs group
+  group:
+    name: "{{ ipfs_group }}"
+    state: present
+  when: ipfs_create_group
+
+- name: create ipfs user
+  user:
+    name: "{{ ipfs_user }}"
+    state: present
+    groups: "{{ ipfs_group }}"
+  when: ipfs_create_user
+
 - block:
 
   - name: copy ipfs bin
