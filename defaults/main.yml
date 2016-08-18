@@ -8,8 +8,8 @@ ipfs_install_rpm: "ipfs"
 ipfs_install_repo: "work on this later"
 
 ## IPFS General OS settings
-ipfs_user: "root"
-ipfs_group: "root"
+ipfs_user: "ipfs"
+ipfs_group: "ipfs"
 ipfs_create_user: true
 ipfs_create_group: true
 
