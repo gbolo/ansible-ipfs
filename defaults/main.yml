@@ -17,6 +17,9 @@ ipfs_service_onboot: true
 ## SET ENV VARIABLE: IPFS_PATH (for configs)
 
 ## IPFS configuration
+ipfs_config_identity:
+  "PeerID": "QmSPMhLhMFUW3DK9QouQTEYWfdXDdsKGSK1fwSUMr6xcWU"
+  "PrivKey": "CAASqAkwggSkAgEAAoIBAQCDliZLrt0KhsEz39bSADyA2/0xwE9kVhUaO6SdFeYUwodHCnFn/msq2tx1QcDbz5FUn+D3czEZisMzGlgrg9Llb9enijzF0IYUY4c+P7OfDmQ9n8A5jLFXPN1BOkkb0nb9EkP25ybtabLUBi1PPLyxKSxP4MFjrZs9r9EEb+Rr1lzbMNpJexCVavbQGZm55M/wp99ZSyT98/rjHE01GXAuj3n167v5d4N7bq8MnHLa9qWDC37zVwbriM1/8k2da3N6QlOlfuFaeLaIek1w1AyamQKRxo+kqM7fRRqhPOLnWhJXiRw00twLioeQ3MB4o1BZFyRD8VRHPhi8yDsJrPcTAgMBAAECggEAUP/edvwfCNnGmD4TqJWIqPHCPBvbQzJSLyHDxQaz6NeOGkbtZEySf4DV8EAXjbeKCIOaIfiAou5uFkkDOVYePinIoFNR8ZrYzjguCj2APkrHnb92vnZCvCa1M+/DDSNTJ5lUyOmlZsOH10guH/aNWKi1pD4ADXHSe/h8O7T88PvNgGjceRjq09a8rabxT54f+/nN7vjrUJtW1oGoGnIaJVfjO+nioqiWmNH8Wp16UeoD7PEj9FJgguxdVps87gTyl2+qZgtUoVEmpR9IhkqTWRRFi5JB83EwFRZ7fVeVaDvWhbLdunxtmSyrXMvY3xhBxqX3kgJVeP26N/uhf5EbYQKBgQDnccaKNBzGpUNu7P4MC+/3j8f8IrOC4jB+/BmhasrISm3iDkaGxWP3jgXbMd4EuTHOEcr23pmQoVeULw7uCDBbmDZaBAIliSS7s+Xw0w7tp5VYhml5KbZCCK5mwnzWn2Fhk10n7mgfc7vkVLss4olQBK9Yh+/3OzERiItPPBerWwKBgQCRjCZLJZEHpUpDnf4AZPIk+80HUMt55GLxgLBC6DuDaBjbo/4bs+jyLHuDwTJsqd7L81VDhmcnmCaJNyVsPbYLZ6LARGJbQbmqDB4xjoiCNiraAasn+9XBlRJW5LVYI6p30pFWYmaSxu3RNPPqJiSOGb89IgulmIz9HbymyrYIqQKBgQCJi5BWagn/9A9TSPzh4+ZE1eof6e+NBSeVD/WbfH/u8GzFP36icYSrhnfsgIJVhEoZEXHxrPDOh1Qo+J6Cz9MNXDRQ4rjz3cE62/r3WDcy/bk/1wGvxB5QuCANaeAPHMEe4BkotgKjToCHfeOPFUJNj7s1ffQalc7fgKpp+GiIqQKBgQCBh0x9DA2p1DvnOS/Xgf7NUxoALLMo40v6ySAUK0DrjTSyI5v9Y3soKtYxRzps4jBZKVD0KySaZBnHe8BeN/1O4QhCO5mcxT1KTEaCq+pol3RDV8DOcJynDtenZRrOOc93m3mkeyX18furd4irFQ7rN5at/SKIWN8AU/qUJUsjIQKBgCrg926iOUC+nNfJcOuM0dgyWycBrmzKeiY752anoeHPtmmcPEMQX8mZP18ardRzQWveV2ISD1MCmfWrUREl1d2Dc/e3bjKmCERoGDXYZJPNzKw/Kxx9+eMLTEF5oh+NBk+sDpKhxs0nz/a+FUhYN9wYYBjyUIqxpz+uLlVcyf0V"
 ipfs_config_api_httpheaders: null
 ipfs_config_addresses_api: "/ip4/0.0.0.0/tcp/5001"
 ipfs_config_addresses_gateway: "/ip4/0.0.0.0/tcp/8080"
@@ -35,13 +38,26 @@ ipfs_config_datastore_Path: "/data/ipfs/datastore"
 ipfs_config_datastore_StorageGCWatermark: 90
 ipfs_config_datastore_StorageMax: "1GB"
 ipfs_config_datastore_Type: "leveldb"
+ipfs_config_mounts_IPFS: "/ipfs"
+ipfs_config_mounts_IPNS: "/ipns"
+ipfs_config_mounts_FuseAllowOther: false
+ipfs_config_discovery_mdns_Enabled: true
+ipfs_config_discovery_mdns_Interval: 10
+ipfs_config_ipns_RepublishPeriod: ""
+ipfs_config_ipns_RecordLifetime: ""
+ipfs_config_ipns_ResolveCacheSize: 128
+ipfs_config_tour_Last: ""
+ipfs_config_gateway_HTTPHeaders: null
+ipfs_config_gateway_RootRedirect: ""
+ipfs_config_gateway_Writable: false
+ipfs_config_gateway_PathPrefixes: []
+ipfs_config_supernoderouting_Servers: null
+ipfs_config_swarm_AddrFilters: null
 
 ## Create dictionary of full config for easy conversion to json
 ipfs_full_config:
-  Identity:
-    PeerID: "QmWabzryMA4sBXqjjarVHqQx52Lc8Ba4ysbn4ANT6uG9HF"
-    PrivKey: "CAASpwkwggSjAgEAAoIBAQCgLCM3SWBJoKKP12XBhC/MjIg5ASSh0QTL3968Zw+GpJJmPuXmneZxLIZqzTSbFYReO9BaoJ8urbJQ9r5jeCXBYNCxX3GqIRhOReaHWz89SjH2633heY/kw/l5zvqHO2CFkUEZqQ3QLymunV/IEUMjxFD2R3cNRcx117XjJxV2u3gSm95AWyyD6f7B4B3TmPu4f+yxENsOZjHpVKpG/YEifMdmv+J0TpzrSJoSs3hLJV9LgrqDRxsRQbBM6mapV7UylsB9AX62rG/mqT0NE3yWyQY2cD9AvLQ9CflO0mxE7W618mvKV4ydHmt3SqLE94t0PmicDEeBOnWCeuY07OUVAgMBAAECggEAT438o84vJALEG1up79cfAqLeWinmLvUpQ7Xa5Irv3DlLebtN5yCQP7AUx2FK+qhSSZe94fWbeszNH4eegrs/TXAv15mHVDAB6YawfJRmsaNzc6f9qwr83Gw2MjkKmDZ2t4Cw6/Tapod2VYNW+oEQbuhoKhrO1+nOJs3QSpW0BHdJgQtppEVTLnpSkGpEX9ld9Y/F1fsuf++ix5UzKqlNqOlB+yEql8c8PPWNinZwFkAMvo4ZQAQ22mimFKtR3doTet6d2ovGth5ExMGWM8Z9Q2zhdtBPwAjw5upopyJpLlomW0hwCbMWYx3RbqJs/SqNWORYTS5dLdC1y2O3aK7TgQKBgQDLo/Xt8cwYOtK/3fRF2KH5CF8If0TeRvuCxCAasB4QG+4x6Efg/wqAuHlHTEBTjXlLNQ7xTF89Pj9MAc2aqbaM/tnQESo3xnPmJ/oib+f3qXbjedRBkaPtJpp4MQJ9y8FjS8SE2PwTcBQNT7P6iqtdCLOygmjBp6w3jJhIkGiZ9QKBgQDJWwTTzN1F8awJDSwdXFqh9kpfubZfK/zpneU1kIe/t4jH3xmH2TXkDz9z3oX/m1ea48YvS7xAJHFxlQFEQShcwPAfv8BFa9wvZ3qNm2Ugg0IJqrgcOi8xNqN6Fs/v2fuBtdyegEWBwzCBtvgECMEbnsgx8ovrHN6U8SWPic6KoQKBgHWfSMedaEN+hohoTVWioTvUh//CcyboXRHU8q43l8W6PET7Y7kj1w8ufm6eLnGUP8Ee7niVolUfhTQDvpxc9qJN+cVihL4elIcWBDar6JJ2gcM2dVFCLCsopwRRWp0KebM+6k3JfyBDFnHx3YUTX5OnGRQ8mwFwNdsIDFWtg52ZAoGAd1s8wU/u2kcnczYbsEvObbNQ4u1y7XdltBWkiNvjnAFvUwssVxqql0Vyl3yQcbPjei0KjX6XWG5B0NJCrfLxugmkTS2dC4mkO3VbcBVtHJixzIkmGZVj5Ag/X1+mYscUDw9+d3YRvZm2Zy3OVpXZ4kV85h6gUf4K8r7/RNarWAECgYEAxp6Gvt/8orgy2A1u2WWFC3D/o09xuDJ68XErcwsFVZV8fSOE6/vfb1ns3lmDocA9dvvfzK5ByhBbide7fRHrXt3tlUnB4dxen39lLyrgvHru49Uy85kCeez5KlJ3ure99uAcevM58y9soGu5iwb7vP/kKmcqpiv35tMvh+E9Kw4="
-  Datastore:
+  "Identity": "{{ ipfs_config_identity }}"
+  "Datastore":
     "Type": "{{ ipfs_config_datastore_Type }}"
     "Path": "{{ ipfs_config_datastore_Path }}"
     "StorageMax": "{{ ipfs_config_datastore_StorageMax }}"
@@ -51,5 +67,31 @@ ipfs_full_config:
     "NoSync": "{{ ipfs_config_datastore_NoSync }}"
   "Addresses":
     "Swarm": "{{ ipfs_config_addresses_swarm }}"
-    "API": "/ip4/127.0.0.1/tcp/5001"
-    "Gateway": "/ip4/127.0.0.1/tcp/8080"
+    "API": "{{ ipfs_config_addresses_api }}"
+    "Gateway": "{{ ipfs_config_addresses_gateway }}"
+  "Mounts":
+    "IPFS": "{{ ipfs_config_mounts_IPFS }}"
+    "IPNS": "{{ ipfs_config_mounts_IPNS }}"
+    "FuseAllowOther": "{{ ipfs_config_mounts_FuseAllowOther }}"
+  "Discovery":
+    "MDNS":
+      "Enabled": "{{ ipfs_config_discovery_mdns_Enabled }}"
+      "Interval": "{{ ipfs_config_discovery_mdns_Interval }}"
+  "Ipns":
+    "RepublishPeriod": "{{ ipfs_config_ipns_RepublishPeriod }}"
+    "RecordLifetime": "{{ ipfs_config_ipns_RecordLifetime }}"
+    "ResolveCacheSize": "{{ ipfs_config_ipns_ResolveCacheSize }}"
+  "Bootstrap": "{{ ipfs_config_bootstrap }}"
+  "Tour":
+    "Last": "{{ ipfs_config_tour_Last }}"
+  "Gateway":
+    "HTTPHeaders": "{{ ipfs_config_gateway_HTTPHeaders }}"
+    "RootRedirect": "{{ ipfs_config_gateway_RootRedirect }}"
+    "Writable": "{{ ipfs_config_gateway_Writable }}"
+    "PathPrefixes": "{{ ipfs_config_gateway_PathPrefixes }}"
+  "SupernodeRouting":
+    "Servers": "{{ ipfs_config_supernoderouting_Servers }}"
+  "API":
+    "HTTPHeaders": "{{ ipfs_config_api_httpheaders }}"
+  "Swarm":
+    "AddrFilters": "{{ ipfs_config_swarm_AddrFilters }}"
