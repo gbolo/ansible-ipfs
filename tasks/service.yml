@@ -1,6 +1,5 @@
 ---
 
-# Add systemd unit file for ipfs
 - name: Add ipfs systemd unit file
   template:
     src: systemd_ipfs.service.j2
@@ -11,3 +10,9 @@
   notify:
     - reload systemd
   when: ipfs_create_systemd_unit
+
+- name: Start and Enable ipfs service
+  service:
+    name: "{{ ipfs_systemd_unit_name }}"
+    state: started
+    enabled: "{{ ipfs_service_onboot }}"
