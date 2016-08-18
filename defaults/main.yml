@@ -1,5 +1,11 @@
 ---
-# defaults file for ipfs
+
+## Install options: url, file, rpm (choose one)
+ipfs_install_option: "url"
+ipfs_install_url: "https://dist.ipfs.io/go-ipfs/v0.4.2/go-ipfs_v0.4.2_linux-amd64.tar.gz"
+ipfs_install_file: "ipfs-0.4.2"
+ipfs_install_rpm: "ipfs"
+ipfs_install_repo: "work on this later"
 
 ## IPFS General OS settings
 ipfs_user: "root"
@@ -7,14 +13,13 @@ ipfs_group: "root"
 ipfs_create_user: true
 ipfs_create_group: true
 
-ipfs_config_path: "test"
+ipfs_config_path: "/var/ipfs"
+ipfs_bin_path: "/usr/local/bin/ipfs"
 ipfs_version_file: 3
 
 ipfs_create_systemd_unit: true
 ipfs_systemd_unit_name: "ipfs"
 ipfs_service_onboot: true
-
-## SET ENV VARIABLE: IPFS_PATH (for configs)
 
 ## IPFS configuration
 ipfs_config_identity:
@@ -34,7 +39,7 @@ ipfs_config_datastore_GCPeriod: "1h"
 ipfs_config_datastore_HashOnRead: false
 ipfs_config_datastore_NoSync: false
 ipfs_config_datastore_Params: null
-ipfs_config_datastore_Path: "/data/ipfs/datastore"
+ipfs_config_datastore_Path: "/var/ipfs/datastore"
 ipfs_config_datastore_StorageGCWatermark: 90
 ipfs_config_datastore_StorageMax: "1GB"
 ipfs_config_datastore_Type: "leveldb"
@@ -55,6 +60,7 @@ ipfs_config_supernoderouting_Servers: null
 ipfs_config_swarm_AddrFilters: null
 
 ## Create dictionary of full config for easy conversion to json
+## To override individual values, use the variables above, not this dictionary!
 ipfs_full_config:
   "Identity": "{{ ipfs_config_identity }}"
   "Datastore":
