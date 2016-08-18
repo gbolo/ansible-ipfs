@@ -1,0 +1,44 @@
+---
+- block:
+
+  - name: copy ipfs bin
+    copy:
+      src: "{{ ipfs_install_file }}"
+      dest: "{{ ipfs_bin_path }}"
+      mode: 0755
+      owner: "{{ ipfs_user }}"
+      group: "{{ ipfs_group }}"
+
+  when: ipfs_install_option == 'file'
+
+- block:
+
+  - name: download ipfs tar
+    get_url:
+      url: "{{ ipfs_install_url }}"
+      dest: "/tmp/ipfs.tar.gz"
+
+  - name: extract ipfs tar
+    unarchive:
+      src: "/tmp/ipfs.tar.gz"
+      dest: "/tmp"
+      copy: no
+
+  - name: stat ipfs bin
+    stat:
+      path: "/tmp/go-ipfs/ipfs"
+    register: ipfs_bin_reg
+
+  - name: copy ipfs bin
+    command: "/usr/bin/cp -rf /tmp/go-ipfs/ipfs {{ ipfs_bin_path }}"
+    when: ipfs_bin_reg.stat.exists
+
+  - name: ensure ipfs bin stats are set
+    file:
+      path: "{{ ipfs_bin_path }}"
+      state: file
+      mode: 0755
+      owner: "{{ ipfs_user }}"
+      group: "{{ ipfs_group }}"
+
+  when: ipfs_install_option == 'url'
