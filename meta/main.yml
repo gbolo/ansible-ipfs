@@ -1,5 +1,5 @@
 galaxy_info:
-  author: George Bolo
+  author: George Bolo <gbolo@linuxctl.com>
   description: Role for Installation and Configuration of IPFS
   company: linuxctl.com
 
