@@ -1,0 +1,31 @@
+---
+
+- name: create ipfs directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0750
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
+  with_items:
+    - "{{ ipfs_config_path }}"
+    - "{{ ipfs_config_path }}/blocks"
+    - "{{ ipfs_config_datastore_Path }}"
+
+- name: push ipfs config
+  template:
+    src: "config.j2"
+    dest: "{{ ipfs_config_path }}/config"
+    mode: 0440
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
+  notify:
+    - restart ipfs
+
+- name: copy ipfs version file
+  copy:
+    content: "{{ ipfs_version_file }}"
+    dest: "{{ ipfs_config_path }}/version"
+    mode: 0440
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
