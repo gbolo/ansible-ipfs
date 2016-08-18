@@ -1,8 +1,4 @@
 ---
-- name: push ipfs config
-  template:
-    src: "config.j2"
-    dest: /root/config.json
-    mode: 0444
-    owner: "{{ ipfs_user }}"
-    group: "{{ ipfs_group }}"
+- include: install.yml
+- include: config.yml
+- include: service.yml
