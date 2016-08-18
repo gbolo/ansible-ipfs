@@ -10,6 +10,7 @@ ExecStart={{ ipfs_bin_path }} daemon
 Restart=on-failure
 RestartSec=30
 User={{ ipfs_user }}
+Group={{ ipfs_group}}
 
 [Install]
 WantedBy=multi-user.target
