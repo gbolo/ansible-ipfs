@@ -1,0 +1,71 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          ipfs-{{ item.key | default(ipfs_systemd_unit_name) }}
+# Required-Start:    $local_fs $network $named $time $syslog
+# Required-Stop:     $local_fs $network $named $time $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       IPFS SERVICE - {{ item.key | default(ipfs_systemd_unit_name) }}
+### END INIT INFO
+
+SCRIPT='{{ item.value.bin_path | default(ipfs_bin_path) }} daemon'
+RUNAS={{ ipfs_user }}
+
+PIDFILE=/var/run/ipfs-{{ item.key | default(ipfs_systemd_unit_name) }}.pid
+LOGFILE=/var/log/ipfs/ipfs-{{ item.key | default(ipfs_systemd_unit_name) }}.log
+
+start() {
+  export IPFS_PATH={{ item.value.config_path | default(ipfs_config_path) }}
+  if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
+    echo 'Service already running' >&2
+    return 1
+  fi
+  echo 'Starting service…' >&2
+  local CMD="$SCRIPT &> \"$LOGFILE\" & echo \$!"
+  su -c "$CMD" $RUNAS > "$PIDFILE"
+  echo 'Service started' >&2
+}
+
+stop() {
+  if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
+    echo 'Service not running' >&2
+    return 1
+  fi
+  echo 'Stopping service…' >&2
+  kill -15 $(cat "$PIDFILE") && rm -f "$PIDFILE"
+  echo 'Service stopped' >&2
+}
+
+status() {
+    printf "%-50s" "Checking $SERVICE_NAME..."
+    if [ -f $PIDFILE ]; then
+        PID=`cat $PIDFILE`
+        if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+            printf "%s\n" "Process dead but pidfile exists"
+            exit 1
+        else
+            echo "Running"
+        fi
+    else
+        printf "%s\n" "Service not running"
+        exit 3
+    fi
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status}"
+esac

@@ -1,0 +1,26 @@
+---
+
+# create user/group ------------------------------------------------------------
+- name: create ipfs group
+  group:
+    name: "{{ ipfs_group }}"
+    state: present
+  when: ipfs_create_group
+
+- name: create ipfs user
+  user:
+    name: "{{ ipfs_user }}"
+    state: present
+    groups: "{{ ipfs_group }}"
+  when: ipfs_create_user
+
+- name: multi node copy ipfs bins
+  copy:
+    src: "{{ item.value.install_file | default(ipfs_install_file) }}"
+    dest: "{{ item.value.bin_path | default(ipfs_bin_path) }}"
+    mode: 0755
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
+  with_dict: "{{ ipfs_nodes }}"
+  notify:
+    - restart ipfs multi

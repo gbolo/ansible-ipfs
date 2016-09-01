@@ -1,0 +1,23 @@
+---
+
+- name: Stop All managed ipfs services
+  service:
+    name: "ipfs-{{ item.key }}"
+    state: stopped
+    enabled: yes
+  with_dict: "{{ ipfs_nodes }}"
+  when: ipfs_delete_data
+
+- name: Delete all IPFS Blocks
+  file:
+    path: "{{ item.value.config_path }}/blocks"
+    state: absent
+  with_dict: "{{ ipfs_nodes }}"
+  when: ipfs_delete_data
+
+- name: Delete all IPFS Datastores
+  file:
+    path: "{{ item.value.config_path }}/datastore"
+    state: absent
+  with_dict: "{{ ipfs_nodes }}"
+  when: ipfs_delete_data

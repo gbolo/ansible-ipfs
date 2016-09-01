@@ -1,0 +1,40 @@
+---
+- name: Add ipfs multiple systemd unit files
+  template:
+    src: systemd_ipfs_multi.service.j2
+    dest: /etc/systemd/system/ipfs-{{ item.key }}.service
+    mode: 0644
+    owner: root
+    group: root
+  with_dict: "{{ ipfs_nodes }}"
+  notify:
+    - reload systemd
+  when: ipfs_create_systemd_unit
+
+- name: Add ipfs init script
+  template:
+    src: init_service.j2
+    dest: /etc/init.d/ipfs-{{ item.key }}
+    mode: 0755
+    owner: root
+    group: root
+  with_dict: "{{ ipfs_nodes }}"
+  when: ipfs_create_init_script
+
+# extra task for systems without systemd journal
+- name: Creating log directory
+  file:
+    path: "/var/log/ipfs"
+    state: directory
+    mode: 0750
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
+  when: ipfs_create_init_script
+
+
+- name: Start and Enable ipfs service
+  service:
+    name: "ipfs-{{ item.key }}"
+    state: started
+    enabled: yes
+  with_dict: "{{ ipfs_nodes }}"

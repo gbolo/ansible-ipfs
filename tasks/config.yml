@@ -19,6 +19,8 @@
     mode: 0440
     owner: "{{ ipfs_user }}"
     group: "{{ ipfs_group }}"
+  tags:
+    - "config"
   notify:
     - restart ipfs
 

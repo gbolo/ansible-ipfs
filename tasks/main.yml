@@ -1,4 +1,19 @@
 ---
-- include: install.yml
-- include: config.yml
-- include: service.yml
+# standard single node deployments ---------------------------------------------
+- block:
+  - include: install.yml
+  - include: config.yml
+  - include: service.yml
+  when: ipfs_multinode_enabled != true
+  become: true
+  become_user: root
+  
+# multi node deployments -------------------------------------------------------
+- block:
+  - include: multi_destroy.yml
+  - include: multi_install.yml
+  - include: multi_config.yml
+  - include: multi_service.yml
+  when: ipfs_multinode_enabled == true
+  become: true
+  become_user: root

@@ -1,5 +1,6 @@
 ---
 
+# create user/group ------------------------------------------------------------
 - name: create ipfs group
   group:
     name: "{{ ipfs_group }}"
@@ -13,6 +14,7 @@
     groups: "{{ ipfs_group }}"
   when: ipfs_create_user
 
+# installation option: file ----------------------------------------------------
 - block:
 
   - name: copy ipfs bin
@@ -25,6 +27,8 @@
 
   when: ipfs_install_option == 'file'
 
+# installation option: url -----------------------------------------------------
+# this will be easier when ansible 2.2 comes out! (unarchive module)
 - block:
 
   - name: download ipfs tar

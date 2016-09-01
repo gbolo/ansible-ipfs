@@ -1,13 +1,22 @@
 ---
 
-## Install options: url, file, rpm (choose one)
+## Install options: url, file, rpm (choose one) --------------------------------
 ipfs_install_option: "url"
 ipfs_install_url: "https://dist.ipfs.io/go-ipfs/v0.4.2/go-ipfs_v0.4.2_linux-amd64.tar.gz"
 ipfs_install_file: "ipfs-0.4.2"
 ipfs_install_rpm: "ipfs"
 ipfs_install_repo: "work on this later"
 
-## IPFS General OS settings
+## multiple ipfs nodes/deamons option ------------------------------------------
+## Use this option if you want to run multiple ipfs deamons with potentially
+## different versions and config. useful for development and experimenting
+ipfs_multinode_enabled: true
+
+## DANGER: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+## SET TO true IF YOU WANT TO DELETE DATA
+ipfs_delete_data: false
+
+## IPFS General OS settings ----------------------------------------------------
 ipfs_user: "ipfs"
 ipfs_group: "ipfs"
 ipfs_create_user: true
@@ -18,22 +27,31 @@ ipfs_bin_path: "/usr/local/bin/ipfs"
 ipfs_version_file: 3
 
 ipfs_create_systemd_unit: true
+ipfs_create_init_script: false
 ipfs_systemd_unit_name: "ipfs"
 ipfs_service_onboot: true
 
-## IPFS configuration
+## IPFS configuration defaults -------------------------------------------------
+## REMEMBER TO CHANGE PeerID and PrivKey!
 ipfs_config_identity:
-  "PeerID": "QmSPMhLhMFUW3DK9QouQTEYWfdXDdsKGSK1fwSUMr6xcWU"
-  "PrivKey": "CAASqAkwggSkAgEAAoIBAQCDliZLrt0KhsEz39bSADyA2/0xwE9kVhUaO6SdFeYUwodHCnFn/msq2tx1QcDbz5FUn+D3czEZisMzGlgrg9Llb9enijzF0IYUY4c+P7OfDmQ9n8A5jLFXPN1BOkkb0nb9EkP25ybtabLUBi1PPLyxKSxP4MFjrZs9r9EEb+Rr1lzbMNpJexCVavbQGZm55M/wp99ZSyT98/rjHE01GXAuj3n167v5d4N7bq8MnHLa9qWDC37zVwbriM1/8k2da3N6QlOlfuFaeLaIek1w1AyamQKRxo+kqM7fRRqhPOLnWhJXiRw00twLioeQ3MB4o1BZFyRD8VRHPhi8yDsJrPcTAgMBAAECggEAUP/edvwfCNnGmD4TqJWIqPHCPBvbQzJSLyHDxQaz6NeOGkbtZEySf4DV8EAXjbeKCIOaIfiAou5uFkkDOVYePinIoFNR8ZrYzjguCj2APkrHnb92vnZCvCa1M+/DDSNTJ5lUyOmlZsOH10guH/aNWKi1pD4ADXHSe/h8O7T88PvNgGjceRjq09a8rabxT54f+/nN7vjrUJtW1oGoGnIaJVfjO+nioqiWmNH8Wp16UeoD7PEj9FJgguxdVps87gTyl2+qZgtUoVEmpR9IhkqTWRRFi5JB83EwFRZ7fVeVaDvWhbLdunxtmSyrXMvY3xhBxqX3kgJVeP26N/uhf5EbYQKBgQDnccaKNBzGpUNu7P4MC+/3j8f8IrOC4jB+/BmhasrISm3iDkaGxWP3jgXbMd4EuTHOEcr23pmQoVeULw7uCDBbmDZaBAIliSS7s+Xw0w7tp5VYhml5KbZCCK5mwnzWn2Fhk10n7mgfc7vkVLss4olQBK9Yh+/3OzERiItPPBerWwKBgQCRjCZLJZEHpUpDnf4AZPIk+80HUMt55GLxgLBC6DuDaBjbo/4bs+jyLHuDwTJsqd7L81VDhmcnmCaJNyVsPbYLZ6LARGJbQbmqDB4xjoiCNiraAasn+9XBlRJW5LVYI6p30pFWYmaSxu3RNPPqJiSOGb89IgulmIz9HbymyrYIqQKBgQCJi5BWagn/9A9TSPzh4+ZE1eof6e+NBSeVD/WbfH/u8GzFP36icYSrhnfsgIJVhEoZEXHxrPDOh1Qo+J6Cz9MNXDRQ4rjz3cE62/r3WDcy/bk/1wGvxB5QuCANaeAPHMEe4BkotgKjToCHfeOPFUJNj7s1ffQalc7fgKpp+GiIqQKBgQCBh0x9DA2p1DvnOS/Xgf7NUxoALLMo40v6ySAUK0DrjTSyI5v9Y3soKtYxRzps4jBZKVD0KySaZBnHe8BeN/1O4QhCO5mcxT1KTEaCq+pol3RDV8DOcJynDtenZRrOOc93m3mkeyX18furd4irFQ7rN5at/SKIWN8AU/qUJUsjIQKBgCrg926iOUC+nNfJcOuM0dgyWycBrmzKeiY752anoeHPtmmcPEMQX8mZP18ardRzQWveV2ISD1MCmfWrUREl1d2Dc/e3bjKmCERoGDXYZJPNzKw/Kxx9+eMLTEF5oh+NBk+sDpKhxs0nz/a+FUhYN9wYYBjyUIqxpz+uLlVcyf0V"
+  "PeerID": "QmPCijXkhCBiS5WKXynqF277gaGQjzyKGBnJNj7XGDrAAa"
+  "PrivKey": "CAASpwkwggSjAgEAAoIBAQCk+swfTlEePHcaT6MppTRgEO9BwMtpnjrEExefAO7mUs5/MVTJfDAtsZkRBVB1hzV2EDP0NfLGVFAMXHWFN0KE3aBeiqZ2JNihEZ9TepGPJfdSFScba0wM79sd9Cyxb8KKf30ep5jusEH70OyLZcikama0z4nacaK4GtUKe0o4OM9HQxcs87TRblugBfJ/rd0pX0KATEFjh/L89vWslrvBW4WEprkqMTu4R/aB8GlWSblze9yjIC5zRbu7cfi737lBH2fBLSjq1Q6ejmIMX38mPJBjyDTQvDGD8JBSTNlbZT4vuYWffb847QGxWFbztYTbkdI6SpOZTVnzNpdqgZXlAgMBAAECggEAfg0lUrIK5ng6Y/7+4j3YY6HsvCdrA5qiudcAkDstTQttvN7bMkrRoMf19HxD+lhBL6C3oVpq0L/wnVEzdYJAL7YJ5tI210PVxFLrkeOvPVk7uxpwU9HKPIQyvZMnZrbGQ/2egoJ5Jb3D3HvHj8ZH499r87AyWpXCRroxlh2XGpaLIAPz3HCo05C33Pfw2bOuYe/I9+R54FH31iHe+qGHJOYbpRi3O0r9ZJ0kIW9VWMozeTi1Yd9Rw3nZkr3ZqYtsj8WvcP70vOFxH13IsYZyiIEg3EXA7784Ihjen9CAE97HH7kNapnfkv37YHUv7xseeQzXw6X3mrwIUkzWvdfpjQKBgQDSVbzxu73W8pBo5QcKKN2X1DXDeIfbawHCI2H1U7tTg16UBGUs78t96I+slGD2T5geW2FIMOJXtgP4GAwWW0G6H1xPnFQWeml/xdXWFmQujUnivj4RjE+hh3Ns/wB1qxZmvj6loBhrS5ADvFlE77yfcEWS2ee+ydPfRI/fbt92owKBgQDIzD+EZ9OFROkQ1F15nmbUV6vm8ws2lr9rdFRrUwgClmCdVRBBkdihyAnCItXxLBbT3JFCWe7Xfzp9I3Rhoasry0MHgRdlK8iPY7SlQt+es7AxakMAOTDnpjmZAzB+96DrEqbaMQrLTjuUaA5kAPXwK4CDk0HVbOwKZ3VXcx1x1wKBgCQt/U8zdQcpOC/i3WAhAWThatIRxIS4llfXkD0Lxxgpa7ZYPzMImF8zBquv5jHYJRlrrIMnbXea5nnhYQrjbZ3fURicklY/fjAtTogB1/+t6/ylrrWEBhqJ2w/vmRukbzkDFnGU5T5nhAEwf8Z82lwuirkk5FkMDHbGK11KjAOzAoGAMoCEXSXL4lHhmHUBCYyYakGen5hzMoiZnkoEzXV1p0jxBcEWNJec95ubMLOYQW8IUsK/2gNKefKq4DxhkgiaR4p40lNacfygFchK7+Gw4nZpExSZw12e+jQpel19/gED/PuU8X2yLE4B2CKPtAE12fDnArCvtyENANTig1sVhcMCgYEAirKqXshebufao0fN/D3aEoQUMLQbF+so8Z4VbsBerKEJ7yazUdOoBJ2/P7n3Ghf2vgBE0lU/d8M+hA6zC/1nu8bbRvnq9rf/fpU1PH4V3hh/n8p6p1eF4G5JrJtZQptg9x6TGH41RWHEPOLX/STupUVYK3tEi99Blp0T7KApIkM="
 ipfs_config_api_httpheaders: null
-ipfs_config_addresses_api: "/ip4/0.0.0.0/tcp/5001"
-ipfs_config_addresses_gateway: "/ip4/0.0.0.0/tcp/8080"
-ipfs_config_addresses_swarm:
+ipfs_config_addresses_API: "/ip4/0.0.0.0/tcp/5001"
+ipfs_config_addresses_Gateway: "/ip4/0.0.0.0/tcp/8080"
+ipfs_config_addresses_Swarm:
   - "/ip4/0.0.0.0/tcp/4001"
   - "/ip6/::/tcp/4001"
 ipfs_config_bootstrap:
   - "/ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ"
   - "/ip4/104.236.176.52/tcp/4001/ipfs/QmSoLnSGccFuZQJzRadHn95W2CrSFmZuTdDWP8HXaHca9z"
+  - "/ip4/104.236.179.241/tcp/4001/ipfs/QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM"
+  - "/ip4/162.243.248.213/tcp/4001/ipfs/QmSoLueR4xBeUbY9WZ9xGUUxunbKWcrNFTDAadQJmocnWm"
+  - "/ip4/128.199.219.111/tcp/4001/ipfs/QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu"
+  - "/ip4/104.236.76.40/tcp/4001/ipfs/QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64"
+  - "/ip4/178.62.158.247/tcp/4001/ipfs/QmSoLer265NRgSp2LA3dPaeykiS1J6DifTC88f5uVQKNAd"
+  - "/ip4/178.62.61.185/tcp/4001/ipfs/QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3"
+  - "/ip4/104.236.151.122/tcp/4001/ipfs/QmSoLju6m7xTh3DuokvT3886QRYqxAzb1kShaanJgW36yx"
 ipfs_config_datastore_BloomFilterSize: 0
 ipfs_config_datastore_GCPeriod: "1h"
 ipfs_config_datastore_HashOnRead: false
@@ -59,7 +77,7 @@ ipfs_config_gateway_PathPrefixes: []
 ipfs_config_supernoderouting_Servers: null
 ipfs_config_swarm_AddrFilters: null
 
-## Create dictionary of full config for easy conversion to json
+## Create dictionary of full config for easy conversion to json ----------------
 ## To override individual values, use the variables above, not this dictionary!
 ipfs_full_config:
   "Identity": "{{ ipfs_config_identity }}"
@@ -72,9 +90,9 @@ ipfs_full_config:
     "Params": "{{ ipfs_config_datastore_Params }}"
     "NoSync": "{{ ipfs_config_datastore_NoSync }}"
   "Addresses":
-    "Swarm": "{{ ipfs_config_addresses_swarm }}"
-    "API": "{{ ipfs_config_addresses_api }}"
-    "Gateway": "{{ ipfs_config_addresses_gateway }}"
+    "Swarm": "{{ ipfs_config_addresses_Swarm }}"
+    "API": "{{ ipfs_config_addresses_API }}"
+    "Gateway": "{{ ipfs_config_addresses_Gateway }}"
   "Mounts":
     "IPFS": "{{ ipfs_config_mounts_IPFS }}"
     "IPNS": "{{ ipfs_config_mounts_IPNS }}"
@@ -95,6 +113,48 @@ ipfs_full_config:
     "RootRedirect": "{{ ipfs_config_gateway_RootRedirect }}"
     "Writable": "{{ ipfs_config_gateway_Writable }}"
     "PathPrefixes": "{{ ipfs_config_gateway_PathPrefixes }}"
+  "SupernodeRouting":
+    "Servers": "{{ ipfs_config_supernoderouting_Servers }}"
+  "API":
+    "HTTPHeaders": "{{ ipfs_config_api_httpheaders }}"
+  "Swarm":
+    "AddrFilters": "{{ ipfs_config_swarm_AddrFilters }}"
+
+## Multi node full configuration dictionary ( due to ansible issue #17159 we cannot override everything )
+## issue url: https://github.com/ansible/ansible/issues/17159
+ipfs_multi_full_config:
+  "Identity": "{{ item.value.config_overrides.identity }}"
+  "Datastore":
+    "Type": "{{ item.value.config_overrides.datastore_Type | default(ipfs_config_datastore_Type) }}"
+    "StorageMax": "{{ item.value.config_overrides.datastore_StorageMax | default(ipfs_config_datastore_StorageMax) }}"
+    "StorageGCWatermark": "{{ ipfs_config_datastore_StorageGCWatermark }}"
+    "GCPeriod": "{{ item.value.config_overrides.datastore_GCPeriod | default(ipfs_config_datastore_GCPeriod) }}"
+    "Params": "{{ ipfs_config_datastore_Params }}"
+    "NoSync": "{{ item.value.config_overrides.datastore_NoSync | default(ipfs_config_datastore_NoSync) }}"
+  "Addresses":
+    "Swarm": "{{ item.value.config_overrides.addresses_Swarm | default(ipfs_config_addresses_Swarm) }}"
+    "API": "{{ item.value.config_overrides.addresses_API | default(ipfs_config_addresses_API) }}"
+    "Gateway": "{{ item.value.config_overrides.addresses_Gateway | default(ipfs_config_addresses_Gateway) }}"
+  "Mounts":
+    "IPFS": "{{ item.value.config_overrides.mounts_IPFS | default(ipfs_config_mounts_IPFS) }}"
+    "IPNS": "{{ item.value.config_overrides.mounts_IPFS | default(ipfs_config_mounts_IPNS) }}"
+    "FuseAllowOther": "{{ item.value.config_overrides.mounts_FuseAllowOther | default(ipfs_config_mounts_FuseAllowOther) }}"
+  "Discovery":
+    "MDNS":
+      "Enabled": "{{ item.value.config_overrides.discovery_mdns_Enabled | default(ipfs_config_discovery_mdns_Enabled) }}"
+      "Interval": "{{ ipfs_config_discovery_mdns_Interval }}"
+  "Ipns":
+    "RepublishPeriod": "{{ item.value.config_overrides.ipns_RepublishPeriod | default(ipfs_config_ipns_RepublishPeriod) }}"
+    "RecordLifetime": "{{ item.value.config_overrides.ipns_RecordLifetime | default(ipfs_config_ipns_RecordLifetime) }}"
+    "ResolveCacheSize": "{{ ipfs_config_ipns_ResolveCacheSize }}"
+  "Bootstrap": "{{ item.value.config_overrides.bootstrap | default(ipfs_config_bootstrap) }}"
+  "Tour":
+    "Last": "{{ item.value.config_overrides.tour_Last | default(ipfs_config_tour_Last) }}"
+  "Gateway":
+    "HTTPHeaders": "{{ ipfs_config_gateway_HTTPHeaders }}"
+    "RootRedirect": "{{ item.value.config_overrides.gateway_RootRedirect | default(ipfs_config_gateway_RootRedirect) }}"
+    "Writable": "{{ item.value.config_overrides.gateway_Writable | default(ipfs_config_gateway_Writable) }}"
+    "PathPrefixes": "{{ item.value.config_overrides.gateway_PathPrefixes | default(ipfs_config_gateway_PathPrefixes) }}"
   "SupernodeRouting":
     "Servers": "{{ ipfs_config_supernoderouting_Servers }}"
   "API":

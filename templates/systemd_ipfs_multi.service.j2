@@ -1,0 +1,16 @@
+[Unit]
+Description=IPFS {{ item.key | default(ipfs_systemd_unit_name) }} Service
+After=network.target
+Requires=network.target
+
+[Service]
+Environment=IPFS_PATH={{ item.value.config_path | default(ipfs_config_path) }}
+ExecStart={{ item.value.bin_path | default(ipfs_bin_path) }} daemon
+
+Restart=on-failure
+RestartSec=30
+User={{ ipfs_user }}
+Group={{ ipfs_group}}
+
+[Install]
+WantedBy=multi-user.target

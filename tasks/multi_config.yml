@@ -1,0 +1,50 @@
+---
+
+- name: multi node create ipfs config paths
+  file:
+    path: "{{ item.value.config_path }}"
+    state: directory
+    mode: 0750
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
+  with_dict: "{{ ipfs_nodes }}"
+
+- name: multi node create blocks path
+  file:
+    path: "{{ item.value.config_path }}/blocks"
+    state: directory
+    mode: 0750
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
+  with_dict: "{{ ipfs_nodes }}"
+
+- name: multi node create datastore path
+  file:
+    path: "{{ item.value.config_path }}/datastore"
+    state: directory
+    mode: 0750
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
+  with_dict: "{{ ipfs_nodes }}"
+
+- name: multi node push ipfs configs
+  template:
+    src: "{{ item.value.config_template | default('config_multi.j2') }}"
+    dest: "{{ item.value.config_path }}/config"
+    mode: 0440
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
+  with_dict: "{{ ipfs_nodes }}"
+  tags:
+    - "config"
+  notify:
+    - restart ipfs multi
+
+- name: multi node copy ipfs version file
+  copy:
+    content: "{{ item.value.version_file | default(ipfs_version_file) }}"
+    dest: "{{ item.value.config_path }}/version"
+    mode: 0440
+    owner: "{{ ipfs_user }}"
+    group: "{{ ipfs_group }}"
+  with_dict: "{{ ipfs_nodes }}"
